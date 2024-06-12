@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Entidades.Seguridad.Direccion>
+
+<div class="container mt-4">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Línea 1</th>
+                    <th>Línea 2</th>
+                    <th>Código Postal</th>
+                    <th>Localidad</th>
+                    <th>Provincia</th>
+                    <th>País</th>
+                    <th>Verificada</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var direccion in Model)
+                {
+                    <tr>
+                        <td>@direccion.Linea1</td>
+                        <td>@direccion.Linea2</td>
+                        <td>@direccion.Codigo_Postal</td>
+                        <td>@direccion.Localidad</td>
+                        <td>@direccion.Provincia</td>
+                        <td>@direccion.Pais</td>
+                        <td>
+                            @if (direccion.Verificada)
+                            {
+                                <span class="badge bg-success">Sí</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">No</span>
+                            }
+                        </td>
+                        <td>
+                            <form asp-action="EliminarDireccion" method="post">
+                                <input type="hidden" name="direccionId" value="@direccion.ID" />
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

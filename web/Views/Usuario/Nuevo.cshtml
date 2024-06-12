@@ -1,0 +1,155 @@
+﻿@model web.Controllers.NewUsuarioViewModel
+@{
+  ViewData["Title"] = "Nuevo";
+}
+
+@section script_links
+{
+  <script src="/lib/just-validate/dist/just-validate.production.min.js" 
+          asp-append-version="true"></script>
+  <script src="/lib/js-sha256/build/sha256.min.js"></script>
+}
+
+@section script_page
+{
+  <script>
+
+    $(document).ready(function() {
+      const validador = new JustValidate("#frmUsuario",
+        {
+          errorFieldCssClass: [ "is-invalid" ],
+          errorLabelCssClass: [ "invalid-feedback" ]
+        });
+
+  
+
+      
+
+      
+
+      
+
+      //
+
+      validador
+        .addField("#@Html.Id("Usuario.Nombre")",
+          [ { rule: "required", errorMessage: "El nombre del usuario es obligatorio" } ])
+
+        .addField("#@Html.IdFor(m => m.Usuario.Correo)",
+          [
+            { rule: "required", errorMessage: "Debe ingresarse un correo electronico!!" },
+            { rule: "email", errorMessage: "El correo electronico no tiene el formato correcto" }
+          ])
+        .addField("#@Html.Id("Usuario.Login")",
+          [ { rule: "required", errorMessage: "La identificacion del usuario para el ingreso es requerida" } ])
+
+        .addField("#passwd",
+          [ { rule: "required", errorMessage: "Se necesita una contraseña para ingresar!!" } ])
+
+        .addField("#passwd_bis",
+          [
+            { rule: "required", errorMessage: "Se necesita repetir la contraseña para validacion" },
+            {
+              validator: (value, ctx) =>
+              {
+                const passPrevia = $("#passwd").val();
+
+                return (passPrevia === value);
+              },
+              errorMessage: "Las contraseñas deben ser iguales, si no para que las hacemos repetir..."
+            }
+          ])
+
+        .onValidate(function (){})
+        .onSuccess(function (event)
+        {
+          const pwd = $("#passwd").val();
+
+          $("#hashedPass").val(sha256(pwd));
+          event.currentTarget.submit();
+        });
+
+     
+
+    }); // jquery ready
+
+  </script>
+}
+
+<div class="row">
+
+  <div class="offset-1 col-10">
+
+    <div class="card m-4">
+      <h4 class="card-header text-black-50 bg-libreria text-center">Crear nuevo usuario</h4>
+
+      <form id="frmUsuario" name="frmUsuario" 
+            asp-controller="Usuario" asp-action="Nuevo" method="post">
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4">
+              <div class="mb-3">
+                <label asp-for="Usuario.Nombre" class="form-label">Nombre</label>
+                <input asp-for="Usuario.Nombre" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mb-3">
+                <label asp-for="Usuario.Login" class="form-label">Login</label>
+                <input asp-for="Usuario.Login" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mb-3">
+                <label asp-for="Usuario.Correo" class="form-label">Correo</label>
+                <input asp-for="Usuario.Correo" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <div class="mb-3">
+                <label asp-for="Usuario.Nacimiento" class="form-label">Cumpleaños</label>
+                <input asp-for="Usuario.Nacimiento" type="text" class="form-control" value="">
+                <span asp-validation-for="Usuario.Nacimiento"></span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mb-3">
+                <label for="passwd" class="form-label">Password</label>
+                <input type="password" id="passwd" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mb-3">
+                <label for="passwd_bis" class="form-label">Repetir Password</label>
+                <input type="password" id="passwd_bis" class="form-control">
+              </div>
+            </div>
+          </div>
+
+ 
+
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-2">
+              <button class="btn btn-outline-danger w-100" type="reset">Cancelar</button>
+            </div>
+            <div class="offset-8 col-2">
+              <button id="btnCrear" class="btn btn-primary w-100" type="submit">Crear</button>
+            </div>
+          </div>
+
+        </div>
+        
+        <input type="hidden" name="hashedPass" id="hashedPass" />
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+

@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Utiles
+@model Entidades.Seguridad.Usuario
+@{
+  string perfiles = Model.Perfiles.JoinString(p => p.Nombre, "|");
+}
+
+<li class="dropdown">
+  <a id="userInfoNav" class="user-info-mini-foto dropdown-toggle text-secondary"
+     data-bs-toggle="dropdown"
+     style="padding-bottom: 10px; padding-top: 10px; cursor: pointer;"
+     title="Usuario">
+    <img width="36" src="/imagenes/Doctora.png" alt="Usuario" class="rounded-circle" />
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-end" style="background-color: goldenrod;">
+    <li>
+      <div class="user-info" style="width: 300px; background-color: burlywood;">
+        <div class="user-info-foto">
+          <img width="100" src="/imagenes/Doctora.png" alt="Usuario" class="rounded-circle" />
+        </div>
+        <div class="user-info-resto">
+          <div class="user-info-nombre">@Model.Nombre</div>
+          <div class="user-info-sector">@perfiles</div>
+        </div>
+      </div>
+    </li>
+    <li class="dropdown-divider"></li>
+    <li>
+      <div class="d-flex" style="align-items: end;">
+        <div class="flex-column d-flex" style="width: 90%;">
+          <a class="text-dark user-info-link"
+             asp-controller="Empleado" asp-action="Nuevo">
+            Crear Nuevo Empleado
+          </a>
+        <a class="text-dark user-info-link"
+            asp-controller="Usuario" asp-action="Nuevo">
+            Crear Nuevo Cliente
+        </a>
+         
+          <a class="text-dark user-info-link"
+             asp-controller="Login" asp-action="Logout">
+            Cerrar Sesion
+          </a>
+        </div>
+        <div class="flex-column">
+          <a class="restart" asp-controller="Login" asp-action="Restart">
+            <span class="fa-solid fa-recycle fa-2x float-end me-2"
+                  style="color: green;"
+                  title="Reinicia la sesion renovando todos los datos del usuario"></span>
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</li>
+

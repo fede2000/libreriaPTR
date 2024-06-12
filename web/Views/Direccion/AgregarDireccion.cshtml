@@ -1,0 +1,121 @@
+﻿@model Entidades.Seguridad.Direccion
+
+@{
+    ViewData["Title"] = "Agregar Dirección";
+}
+@* <div class="row">
+
+    <div class="offset-1 col-10">
+
+        <div class="card m-4">
+            <h1 class="mb-4">Agregar Dirección</h1>
+
+            <form asp-action="AgregarDireccion" method="post">
+                <div class="mb-3">
+                    <label for="linea1" class="form-label">Línea 1</label>
+                    <input class="form-control" type="text" id="linea1" name="Linea1" value="@Model.Linea1" required />
+                </div>
+                <div class="mb-3">
+                    <label for="linea2" class="form-label">Línea 2</label>
+                    <input class="form-control" type="text" id="linea2" name="Linea2" value="@Model.Linea2" />
+                </div>
+                <div class="mb-3">
+                    <label for="codigoPostal" class="form-label">Código Postal</label>
+                    <input class="form-control" type="text" id="codigoPostal" name="codigoPostal" value="@Model.Codigo_Postal" required />
+                </div>
+                <div class="mb-3">
+                    <label for="provincia" class="form-label">Provincia</label>
+                    <input class="form-control" type="text" id="provincia" name="Provincia" value="@Model.Provincia" required />
+                </div>
+                <div class="mb-3">
+                    <label for="localidad" class="form-label">Localidad</label>
+                    <input class="form-control" type="text" id="localidad" name="Localidad" value="@Model.Localidad" required />
+                </div>
+                <div class="mb-3">
+                    <label for="pais" class="form-label">País</label>
+                    <input class="form-control" type="text" id="pais" name="Pais" value="@Model.Pais" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+
+        </div>
+    </div>
+
+</div> *@
+
+<div class="row">
+
+    <div class="offset-1 col-10">
+
+        <div class="card m-4">
+            <h4 class="card-header text-black-50 bg-libreria text-center">Crear nueva Dirección</h4>
+
+            <form asp-action="AgregarDireccion" method="post">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="linea1" class="form-label">Línea 1</label>
+                                <input class="form-control" type="text" id="linea1" name="Linea1" value="@Model.Linea1" required />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="linea2" class="form-label">Línea 2</label>
+                                <input class="form-control" type="text" id="linea2" name="Linea2" value="@Model.Linea2" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="codigoPostal" class="form-label">Código Postal</label>
+                                <input class="form-control" type="text" id="codigoPostal" name="codigoPostal" value="@Model.Codigo_Postal" required />
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="pais" class="form-label">País</label>
+                                <input class="form-control" type="text" id="pais" name="Pais" value="@Model.Pais" required />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="provincia" class="form-label">Provincia</label>
+                                <input class="form-control" type="text" id="provincia" name="Provincia" value="@Model.Provincia" required />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="localidad" class="form-label">Localidad</label>
+                                <input class="form-control" type="text" id="localidad" name="Localidad" value="@Model.Localidad" required />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-2">
+                            <button class="btn btn-outline-danger w-100" type="reset">Cancelar</button>
+                        </div>
+                        <div class="offset-8 col-2">
+                            <button id="btnCrear" class="btn btn-primary w-100" type="submit">Crear</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <input type="hidden" name="hashedPass" id="hashedPass" />
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+

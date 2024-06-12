@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Entidades.Seguridad.Direccion>
+
+@{
+    ViewData["Title"] = "Mis Direcciones";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <div>
+        @Html.Partial("_DireccionesTable", Model)
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a class="btn btn-primary" asp-controller="Direccion" asp-action="AgregarDireccion">
+            Agregar Dirección
+        </a>
+    </div>
+</div>
